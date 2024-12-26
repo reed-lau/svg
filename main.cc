@@ -11,13 +11,15 @@ int main() {
   int dx = 80;
   int dy = 40;
 
+  int font_size = std::max(20, dy - 16);
+
   for (int irow = 0; irow < num_row; ++irow) {
     int y = irow * dy;
     for (int icol = 0; icol < num_col; ++icol) {
       int x = icol * dx;
       int idx = icol + irow * num_col;
 
-      std::string text = std::string("T") + std::to_string(icol);
+      std::string text = std::string("T") + std::to_string(idx);
 
       svg.addRect()
           .x(x)
@@ -30,7 +32,7 @@ int main() {
       svg.addText()
           .x(x + dx / 2)
           .y(y + dy / 2)
-          .font_size(dy - 10)
+          .font_size(font_size)
           .alignment_baseline("central")
           .text_anchor("middle")
           .text(text);
