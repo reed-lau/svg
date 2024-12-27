@@ -1,9 +1,11 @@
-#ifndef ELEMENT_H
-#define ELEMENT_H
+#ifndef SVGCPP_H_
+#define SVGCPP_H_
 
 #include <memory>
 #include <string>
 #include <vector>
+
+namespace svgcpp {
 
 class Element {
  public:
@@ -66,8 +68,8 @@ class SVG {
   SVG();
   virtual ~SVG();
 
-  Rect& addRect();
-  Text& addText();
+  Rect& AddRect();
+  Text& AddText();
 
   bool Write(const std::string& file);
 
@@ -75,4 +77,6 @@ class SVG {
   std::vector<std::shared_ptr<Element>> elements_;
 };
 
-#endif  // ELEMENT_H
+}  // namespace svgcpp
+
+#endif  // SVGCPP_H_

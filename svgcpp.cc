@@ -1,7 +1,9 @@
-#include "svg.h"
+#include "svgcpp.h"
 
 #include <fstream>
 #include <iostream>
+
+namespace svgcpp {
 
 // Rect implementation
 Rect::Rect() : x_(0), y_(0), width_(0), height_(0), stroke_width_(1) {}
@@ -102,19 +104,21 @@ SVG::SVG() {}
 
 SVG::~SVG() {}
 
-Rect& SVG::addRect() {
+Rect& SVG::AddRect() {
   elements_.emplace_back(std::make_shared<Rect>());
   return *std::dynamic_pointer_cast<Rect>(elements_.back());
 }
 
-Text& SVG::addText() {
+Text& SVG::AddText() {
   elements_.emplace_back(std::make_shared<Text>());
   return *std::dynamic_pointer_cast<Text>(elements_.back());
 }
 
 bool SVG::Write(const std::string& file) {
   std::ofstream ofs(file);
-  if (!ofs.is_open()) return false;
+  if (!ofs.is_open()) {
+    return false;
+  }
 
   ofs << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">"
       << std::endl;
@@ -125,3 +129,5 @@ bool SVG::Write(const std::string& file) {
 
   return true;
 }
+
+}  // namespace svgcpp
